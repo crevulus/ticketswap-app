@@ -8,7 +8,10 @@ import Link from 'next/link'
 const Wrapper = styled.div`
   display: grid;
   grid-gap: ${space[16]};
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); // NOTE: Change card spacing for greater responsiveness
 `
 
 const PopularEvents = () => {
@@ -31,10 +34,12 @@ const PopularEvents = () => {
   return (
     <Wrapper>
       {popularEvents.map(({ id, name, location, date, imageUrl }) => (
-        <Link href={`/event/${id}`} passHref>
+        // NOTE: Only browser console bug was the classic "missing key" error
+        <Link href={`/event/${id}`} key={id} passHref>
           <a>
             <Card
               title={name}
+              // NOTE: Would like to change the subtitle colour because it's bad for a11y
               subtitle={`${location} - ${new Date(date).toLocaleDateString()}`}
               image={imageUrl}
             />

@@ -5,6 +5,7 @@ import Footer from '~/components/Footer'
 import { H2, H5, Image, Text } from '@ticketswap/solar'
 import { useQuery } from '@apollo/client'
 import getEvent from '~/graphql/queries/getEvent'
+import Head from 'next/head'
 
 const Event = ({ eventId }) => {
   const { data, loading } = useQuery(getEvent, {
@@ -19,6 +20,10 @@ const Event = ({ eventId }) => {
 
   return (
     <>
+      {/* NOTE: Add title tags for ease of use */}
+      <Head>
+        <title>{name} | TicketSwap Challenger</title>
+      </Head>
       <Cover />
 
       <Container>
