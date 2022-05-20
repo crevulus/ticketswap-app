@@ -1,7 +1,8 @@
 import React from 'react'
 import { TicketSwap } from '@ticketswap/solar/icons'
 import styled from '@emotion/styled'
-import { space, color, H1, shadow } from '@ticketswap/solar'
+import { space, color, H1, shadow, fontSize } from '@ticketswap/solar'
+import { CoverLink } from './CoverLink'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -16,11 +17,26 @@ const Title = styled(H1)`
   color: ${color.lightForeground};
 `
 
-const Cover = () => (
-  <Wrapper>
-    <TicketSwap size={64} />
-    <Title>TicketSwap Challenger</Title>
-  </Wrapper>
-)
+const LinksContainer = styled.div`
+  display: flex;
+  gap: ${space[16]};
+  justify-content: center;
+  align-items: center;
+  margin: ${space[16]};
+  font-size: ${fontSize[24]};
+`
+
+const Cover = () => {
+  return (
+    <Wrapper>
+      <TicketSwap size={64} />
+      <Title>TicketSwap Challenger</Title>
+      <LinksContainer>
+        <CoverLink href="/" label="Home" />
+        <CoverLink href="/search" label="Search" />
+      </LinksContainer>
+    </Wrapper>
+  )
+}
 
 export default Cover

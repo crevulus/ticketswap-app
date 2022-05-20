@@ -2,7 +2,7 @@ import React from 'react'
 import Container from '~/components/Container'
 import Cover from '~/components/Cover'
 import Footer from '~/components/Footer'
-import { Collapsible, color, fontSize, Text, space } from '@ticketswap/solar'
+import { Collapsible, fontSize, Text, space } from '@ticketswap/solar'
 import styled from '@emotion/styled'
 import PopularEvents from '~/components/PopularEvents'
 
@@ -27,8 +27,6 @@ const Emoji = styled.span`
 
 const Home = () => (
   <>
-    <Cover />
-
     <Container>
       <Description as="p">
         <strong>Welcome to the TicketSwap challenger.</strong> The goal of this
@@ -80,13 +78,21 @@ const Home = () => (
             well.
             <ul>
               <li>
-                <a href="https://github.com/TicketSwap/solar">Github Solar</a>
+                {/* NOTE: Getting redirected when I used these links was annoying, so I made them open in a new tab */}
+                <a href="https://github.com/TicketSwap/solar" target="_blank">
+                  Github Solar
+                </a>
               </li>
               <li>
-                <a href="https://ticketswap.github.io/solar">Storybook Solar</a>
+                <a href="https://ticketswap.github.io/solar" target="_blank">
+                  Storybook Solar
+                </a>
               </li>
               <li>
-                <a href="https://ticketswap.github.io/comets-playground/">
+                <a
+                  href="https://ticketswap.github.io/comets-playground/"
+                  target="_blank"
+                >
                   Playground Comets
                 </a>
               </li>

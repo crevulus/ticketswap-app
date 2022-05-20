@@ -24,7 +24,6 @@ const Event = ({ eventId }) => {
       <Head>
         <title>{name} | TicketSwap Challenger</title>
       </Head>
-      <Cover />
 
       <Container>
         <Image src={imageUrl} size={128} />
