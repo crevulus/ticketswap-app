@@ -12,5 +12,6 @@ export const typeDefs = gql`
   type Query {
     popularEvents(first: Int!): [Event!]!
     event(id: Int!): Event
+    filterEvents(name: String!): [Event!]!
   }
 `

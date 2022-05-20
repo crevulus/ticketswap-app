@@ -11,6 +11,12 @@ export const resolvers = {
       const { id } = args
 
       return events.find(event => event.id === id) || null
-    }
+    },
+    filterEvents(_parent, args, _context, _info) {
+      const { name } = args
+      return events.filter(event =>
+        event.name.toLowerCase().includes(name.toLowerCase())
+      )
+    },
   },
 }
