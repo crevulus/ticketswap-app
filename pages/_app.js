@@ -4,6 +4,7 @@ import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '~/graphql/client'
 import BaseStyles from '~/styles/global'
 import Cover from '~/components/Cover'
+import Footer from '~/components/Footer'
 
 export default function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps.initialApolloState)
@@ -20,6 +21,7 @@ export default function App({ Component, pageProps }) {
       {/* NOTE: Moved this to one location */}
       <Cover />
       <Component {...pageProps} />
+      <Footer />
     </ApolloProvider>
   )
 }

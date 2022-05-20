@@ -1,7 +1,5 @@
 import React from 'react'
 import Container from '~/components/Container'
-import Cover from '~/components/Cover'
-import Footer from '~/components/Footer'
 import { H2, H5, Image, Text } from '@ticketswap/solar'
 import { useQuery } from '@apollo/client'
 import getEvent from '~/graphql/queries/getEvent'
@@ -32,8 +30,6 @@ const Event = ({ eventId }) => {
         <H5>{location}</H5>
         <Text>{description}</Text>
       </Container>
-
-      <Footer />
     </>
   )
 }

@@ -1,8 +1,6 @@
 import React from 'react'
-import { useQuery } from '@apollo/client'
 import { Card, space, Spinner } from '@ticketswap/solar'
 import styled from '@emotion/styled'
-import getPopularEvents from '~/graphql/queries/getPopularEvents'
 import Link from 'next/link'
 
 const Wrapper = styled.div`
@@ -14,13 +12,7 @@ const Wrapper = styled.div`
   ); // NOTE: Change card spacing for greater responsiveness
 `
 
-const PopularEvents = () => {
-  const { loading, data } = useQuery(getPopularEvents, {
-    variables: {
-      first: 6,
-    },
-  })
-
+const Events = ({ data, loading }) => {
   if (loading) {
     return (
       <Wrapper>
@@ -29,11 +21,13 @@ const PopularEvents = () => {
     )
   }
 
-  const { popularEvents } = data
+  // NOTE: Bit hacky, maybe. Could also pass in a query type def as a string and extract that. But the queries in this proj always return one item in the data obj, so I feel this is safe for now.
+  const dataLabel = Object.keys(data)[0]
+  const events = data[dataLabel]
 
   return (
     <Wrapper>
-      {popularEvents.map(({ id, name, location, date, imageUrl }) => (
+      {events.map(({ id, name, location, date, imageUrl }) => (
         // NOTE: Only browser console bug was the classic "missing key" error
         <Link href={`/event/${id}`} key={id} passHref>
           <a>
@@ -50,4 +44,4 @@ const PopularEvents = () => {
   )
 }
 
-export default PopularEvents
+export default Events

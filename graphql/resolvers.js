@@ -14,8 +14,11 @@ export const resolvers = {
     },
     filterEvents(_parent, args, _context, _info) {
       const { name } = args
-      return events.filter(event =>
-        event.name.toLowerCase().includes(name.toLowerCase())
+      // NOTE: Just doing simple search here. Would usually use fuse js or leave it to backend
+      return (
+        events.filter(event =>
+          event.name.toLowerCase().includes(name.toLowerCase())
+        ) || null
       )
     },
   },

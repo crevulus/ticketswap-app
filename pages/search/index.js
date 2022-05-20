@@ -1,22 +1,51 @@
-import { useQuery } from '@apollo/client'
+import { useState } from 'react'
+import { useLazyQuery } from '@apollo/client'
+import { Button, ButtonSize, ButtonVariant, Input } from '@ticketswap/solar'
+import { MagnifyingGlass } from '@ticketswap/solar/icons'
 import Head from 'next/head'
 import React from 'react'
+import Events from '~/components/Events'
 import getFilteredEvents from '~/graphql/queries/getFilteredEvents'
 
-function index() {
-  const { data, loading } = useQuery(getFilteredEvents, {
-    variables: {
-      name: 'DI-RECT',
-    },
-  })
+function Search() {
+  const [name, setName] = useState('')
 
-  if (loading || !data) return null
+  const [fetchData, { data, loading }] = useLazyQuery(getFilteredEvents)
+
+  const handleSearch = e => {
+    e.preventDefault()
+    fetchData({
+      variables: {
+        name,
+      },
+    })
+  }
 
   return (
-    <Head>
-      <title>Search | TicketSwap Challenger</title>
-    </Head>
+    <>
+      <Head>
+        <title>Search | TicketSwap Challenger</title>
+      </Head>
+
+      <form onSubmit={handleSearch}>
+        <Input
+          id="search"
+          placeholder="Search for an event"
+          leftAdornment={<MagnifyingGlass size={24} />}
+          onChange={e => setName(e.target.value)}
+        />
+        <Button
+          size={ButtonSize.medium}
+          variant={ButtonVariant.primary}
+          type="submit"
+        >
+          Search
+        </Button>
+      </form>
+
+      {(data || loading) && <Events data={data} loading={loading} />}
+    </>
   )
 }
 
-export default index
+export default Search
