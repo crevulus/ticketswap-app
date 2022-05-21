@@ -74,7 +74,9 @@ const Event = ({ data, loading }) => {
             {new Date(date).toLocaleDateString()}, {location}
           </StyledH2>
           <Link href="https://www.ticketswap.com/">
-            <Pill leftAdornment={<Ticket size={16} />}>25</Pill>
+            <a>
+              <Pill leftAdornment={<Ticket size={16} />}>25</Pill>
+            </a>
           </Link>
         </StyledSubHeading>
       </StyledHeading>

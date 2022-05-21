@@ -1,7 +1,9 @@
 import React from 'react'
-import { Card, space, Spinner } from '@ticketswap/solar'
+import { Card, space, Spinner, color } from '@ticketswap/solar'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { WarningRounded } from '@ticketswap/solar/icons'
+import Container from './Container'
 
 const Wrapper = styled.div`
   display: grid;
@@ -10,6 +12,14 @@ const Wrapper = styled.div`
     auto-fit,
     minmax(300px, 1fr)
   ); // NOTE: Change card spacing for greater responsiveness
+`
+
+const StyledLink = styled.a`
+  max-width: 350px;
+`
+
+const StyledErrorWarning = styled(Card)`
+  background-color: ${color.failureBackground};
 `
 
 const Events = ({ data, loading }) => {
@@ -25,21 +35,32 @@ const Events = ({ data, loading }) => {
   const dataLabel = Object.keys(data)[0]
   const events = data[dataLabel]
 
+  const noResults = data && events.length === 0
+
   return (
     <Wrapper>
       {events.map(({ id, name, location, date, imageUrl }) => (
         // NOTE: Only browser console bug was the classic "missing key" error
         <Link href={`/event/${id}`} key={id} passHref>
-          <a>
+          <StyledLink>
             <Card
               title={name}
               // NOTE: Would like to change the subtitle colour because it's bad for a11y
               subtitle={`${location} - ${new Date(date).toLocaleDateString()}`}
               image={imageUrl}
             />
-          </a>
+          </StyledLink>
         </Link>
       ))}
+      {noResults && (
+        <Container>
+          <StyledErrorWarning
+            title="No results"
+            subtitle="Try searching for something else"
+            leftAdornment={<WarningRounded color={color.failure} />}
+          />
+        </Container>
+      )}
     </Wrapper>
   )
 }

@@ -9,6 +9,7 @@ const Wrapper = styled.footer`
   text-align: center;
 `
 
+// NOTE: With more time I'd make this a sticky footer, like I did it in https://github.com/crevulus/kijkkat/blob/main/src/styles/index.css
 const Footer = () => (
   <Wrapper>
     <TicketSwap /> TicketSwap
