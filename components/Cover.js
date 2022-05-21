@@ -7,7 +7,6 @@ import { CoverLink } from './CoverLink'
 const Wrapper = styled.div`
   text-align: center;
   padding: ${space[16]} 0;
-  margin-bottom: ${space[32]};
   color: ${color.lightForeground};
   background-color: ${color.brand};
   box-shadow: ${shadow.strong};

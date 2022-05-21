@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 
+export const GQL_URI = 'http://localhost:3000/api/graphql'
+
 let apolloClient
 
 function createIsomorphLink() {

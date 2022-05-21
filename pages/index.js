@@ -34,7 +34,7 @@ const Home = () => {
   })
 
   return (
-    <>
+    <main>
       <Container>
         <Description as="p">
           <strong>Welcome to the TicketSwap challenger.</strong> The goal of
@@ -133,7 +133,7 @@ const Home = () => {
         <SubTitle>Popular events</SubTitle>
         <Events data={data} loading={loading} />
       </Container>
-    </>
+    </main>
   )
 }
 

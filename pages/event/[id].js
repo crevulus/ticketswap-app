@@ -1,43 +1,139 @@
 import React from 'react'
 import Container from '~/components/Container'
-import { H2, H5, Image, Text } from '@ticketswap/solar'
-import { useQuery } from '@apollo/client'
+import {
+  Image,
+  H2,
+  Text,
+  H1,
+  Collapsible,
+  H3,
+  Pill,
+  space,
+  fontSize,
+} from '@ticketswap/solar'
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 import getEvent from '~/graphql/queries/getEvent'
 import Head from 'next/head'
+import { GQL_URI } from '~/graphql/client'
+import styled from '@emotion/styled'
+import { Ticket } from '@ticketswap/solar/icons'
+import Link from 'next/link'
 
-const Event = ({ eventId }) => {
-  const { data, loading } = useQuery(getEvent, {
-    variables: {
-      id: parseInt(eventId),
-    },
-  })
+const StyledHeading = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`
 
-  if (loading || !data.event) return null
+// NOTE: Chose to use `grid` for better spacing
+const StyledSubHeading = styled(Container)`
+  display: grid;
+  grid-template-columns: 1fr 70% 1fr;
+  align-items: center;
+  justify-items: start;
+  gap: ${space[16]};
+`
+
+const StyledH2 = styled(H2)`
+  font-size: ${fontSize[16]};
+  grid-column-start: 2;
+`
+
+// NOTE: Wanted to do this with a blurred Cover from Solar but couldn't get it to work
+const StyledImage = styled(Image)`
+  position: relative;
+  max-height: 400px;
+`
+
+const StyledListItem = styled.li`
+  &:not(:last-child) {
+    margin-bottom: ${space[16]};
+  }
+`
+
+const Event = ({ data, loading }) => {
+  if (!data) return null
+  if (loading) return <div>Loading...</div>
 
   const { name, date, location, imageUrl, description } = data.event
 
   return (
-    <>
+    <main>
       {/* NOTE: Add title tags for ease of use */}
       <Head>
         <title>{name} | TicketSwap Challenger</title>
       </Head>
 
+      <StyledHeading>
+        <H1>{name}</H1>
+        <StyledSubHeading>
+          {/* NOTE: Follow heading guidelines for a11y */}
+          {/* NOTE: Time arguably not so important; keep it down to important info for user. */}
+          <StyledH2>
+            {new Date(date).toLocaleDateString()}, {location}
+          </StyledH2>
+          <Link href="https://www.ticketswap.com/">
+            <Pill leftAdornment={<Ticket size={16} />}>25</Pill>
+          </Link>
+        </StyledSubHeading>
+      </StyledHeading>
+
+      <StyledImage src={imageUrl} />
+
       <Container>
-        <Image src={imageUrl} size={128} />
-        <H2>{name}</H2>
-        <H5>{new Date(date).toLocaleString()}</H5>
-        <H5>{location}</H5>
         <Text>{description}</Text>
       </Container>
-    </>
+      <Container>
+        <Collapsible buttonLabel="Venue info">
+          <ul>
+            <StyledListItem>
+              <H3>Lockers</H3>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </Text>
+            </StyledListItem>
+            <StyledListItem>
+              <H3>Access</H3>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </Text>
+            </StyledListItem>
+            <StyledListItem>
+              <H3>Safety</H3>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </Text>
+            </StyledListItem>
+          </ul>
+        </Collapsible>
+      </Container>
+    </main>
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
+export async function getServerSideProps({ params }) {
+  const client = new ApolloClient({
+    // NOTE: As far as I understand from the following post I need to instantiate a new client to work in SSR. For re-use could make this an exported value in client.js. https://stackoverflow.com/questions/67163527/does-usequery-run-on-server-side-rendering
+    uri: GQL_URI,
+    cache: new InMemoryCache(),
+  })
+
+  const { data, loading } = await client.query({
+    query: getEvent,
+    variables: {
+      id: parseInt(params.id),
+    },
+  })
+
   return {
     props: {
       eventId: params.id,
+      data,
+      loading,
     },
   }
 }
