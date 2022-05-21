@@ -18,10 +18,18 @@ export default function App({ Component, pageProps }) {
 
       <BaseStyles />
 
-      {/* NOTE: Moved this to one location */}
+      {/* NOTE: Moved Cover to one location */}
       <Cover />
       <Component {...pageProps} />
       <Footer />
     </ApolloProvider>
   )
 }
+
+/* A TODO list if I had more time:
+  - Refactor to TS
+  - Unit tests
+  - Performance checks - lighthouse score is not great!
+  - Amendments to some stories, e.g. to improve a11y
+  - Make footer stick to bottom if not much content
+*/

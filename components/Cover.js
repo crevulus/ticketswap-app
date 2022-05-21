@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { space, color, H1, shadow, fontSize } from '@ticketswap/solar'
 import { CoverLink } from './CoverLink'
 
-const Wrapper = styled.div`
+const StyledWrapper = styled.div`
   text-align: center;
   padding: ${space[16]} 0;
   color: ${color.lightForeground};
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   box-shadow: ${shadow.strong};
 `
 
-const Title = styled(H1)`
+const StyledTitle = styled(H1)`
   color: ${color.lightForeground};
 `
 
@@ -27,14 +27,14 @@ const LinksContainer = styled.div`
 
 const Cover = () => {
   return (
-    <Wrapper>
+    <StyledWrapper>
       <TicketSwap size={64} />
-      <Title>TicketSwap Challenger</Title>
+      <StyledTitle>TicketSwap Challenger</StyledTitle>
       <LinksContainer>
         <CoverLink href="/" label="Home" />
         <CoverLink href="/search" label="Search" />
       </LinksContainer>
-    </Wrapper>
+    </StyledWrapper>
   )
 }
 

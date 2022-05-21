@@ -5,12 +5,13 @@ import Link from 'next/link'
 import { WarningRounded } from '@ticketswap/solar/icons'
 import Container from './Container'
 
-const Wrapper = styled.div`
+// NOTE: I like `Styled{{component}}` because it helps to differentiate between the a regular import and one with custom stylings
+const StyledWrapper = styled.div`
   display: grid;
   grid-gap: ${space[16]};
   grid-template-columns: repeat(
     auto-fit,
-    minmax(300px, 1fr)
+    minmax(350px, 1fr)
   ); // NOTE: Change card spacing for greater responsiveness
 `
 
@@ -25,9 +26,9 @@ const StyledErrorWarning = styled(Card)`
 const Events = ({ data, loading }) => {
   if (loading) {
     return (
-      <Wrapper>
+      <StyledWrapper>
         <Spinner />
-      </Wrapper>
+      </StyledWrapper>
     )
   }
 
@@ -38,7 +39,7 @@ const Events = ({ data, loading }) => {
   const noResults = data && events.length === 0
 
   return (
-    <Wrapper>
+    <StyledWrapper>
       {events.map(({ id, name, location, date, imageUrl }) => (
         // NOTE: Only browser console bug was the classic "missing key" error
         <Link href={`/event/${id}`} key={id} passHref>
@@ -61,7 +62,7 @@ const Events = ({ data, loading }) => {
           />
         </Container>
       )}
-    </Wrapper>
+    </StyledWrapper>
   )
 }
 
