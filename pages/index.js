@@ -36,13 +36,13 @@ const Home = () => {
   return (
     <main>
       <Container>
-        <Description as="p">
+        <StyledDescription as="p">
           <strong>Welcome to the TicketSwap challenger.</strong> The goal of
           this challenger is to finish the todo list stated below{' '}
           <StyledEmoji>☑️</StyledEmoji> Of course if you see anything that can
           be improved apart from the todo list, you're welcome to do so{' '}
           <StyledEmoji>☺️</StyledEmoji>
-        </Description>
+        </StyledDescription>
 
         <Collapsible buttonLabel="Todo list">
           <StyledList>
