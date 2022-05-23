@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from '~/components/Container'
 import {
-  Image,
+  Image, // NOTE: Could get better performance with next/image (and cache validation for SEO)
   H2,
   Text,
   H1,
@@ -60,16 +60,16 @@ const Event = ({ data, loading }) => {
 
   return (
     <main>
-      {/* NOTE: Add title tags for ease of use */}
+      {/* 5 NOTE: Add title tags for ease of use */}
       <Head>
-        <title>{name} | TicketSwap Challenger</title>
+        <title>{name || 'Events'} | TicketSwap Challenger</title>
       </Head>
 
       <StyledHeading>
         <H1>{name}</H1>
         <StyledSubHeading>
-          {/* NOTE: Follow heading guidelines for a11y */}
-          {/* NOTE: Time arguably not so important; keep it down to important info for user. */}
+          {/* 5 NOTE: Follow heading guidelines for a11y */}
+          {/* 4 NOTE: Time arguably not so important; keep it down to important info for user. */}
           <StyledH2>
             {new Date(date).toLocaleDateString()}, {location}
           </StyledH2>
@@ -119,7 +119,8 @@ const Event = ({ data, loading }) => {
 
 export async function getServerSideProps({ params }) {
   const client = new ApolloClient({
-    // NOTE: As far as I understand from the following post I need to instantiate a new client to work in SSR. For re-use could make this an exported value in client.js. https://stackoverflow.com/questions/67163527/does-usequery-run-on-server-side-rendering
+    // 3 NOTE: As far as I understand I need to instantiate a new client to work in SSR. For re-use could make this an exported value in client.js.
+    // 5 NOTE: Should arguably be SSG, as event data doesn't change.
     uri: GQL_URI,
     cache: new InMemoryCache(),
   })

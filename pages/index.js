@@ -6,22 +6,22 @@ import Events from '~/components/Events'
 import { useQuery } from '@apollo/client'
 import getPopularEvents from '~/graphql/queries/getPopularEvents'
 
-const List = styled.ul`
+const StyledList = styled.ul`
   list-style: disc;
   margin-left: ${space[16]};
 `
 
-const Description = styled(Text)`
+const StyledDescription = styled(Text)`
   font-size: ${fontSize[18]};
   margin: ${space[32]} 0 ${space[16]};
 `
 
-const SubTitle = styled.h3`
+const StyledSubTitle = styled.h3`
   margin-top: ${space[32]};
   margin-bottom: ${space[16]};
 `
 
-const Emoji = styled.span`
+const StyledEmoji = styled.span`
   font-family: initial;
 `
 
@@ -39,12 +39,14 @@ const Home = () => {
         <Description as="p">
           <strong>Welcome to the TicketSwap challenger.</strong> The goal of
           this challenger is to finish the todo list stated below{' '}
-          <Emoji>☑️</Emoji> Of course if you see anything that can be improved
-          apart from the todo list, you're welcome to do so <Emoji>☺️</Emoji>
+          <StyledEmoji>☑️</StyledEmoji> Of course if you see anything that can
+          be improved apart from the todo list, you're welcome to do so{' '}
+          <StyledEmoji>☺️</StyledEmoji>
         </Description>
 
         <Collapsible buttonLabel="Todo list">
-          <List>
+          <StyledList>
+            {/* NOTE: `strong` tags make styling less tweak-able; I'd prefer to style with css but it depends on your coding standards */}
             <li>
               <strong>Improvement:</strong> The Challenger should be mobile
               friendly
@@ -66,20 +68,21 @@ const Home = () => {
               a search page and search all the events. I want to see the results
               and be able to navigate to an event.
             </li>
-          </List>
+          </StyledList>
         </Collapsible>
 
-        <Description as="p">
+        <StyledDescription as="p">
           <strong>Tip:</strong> Below is a list of references you can use to get
           started if you have little experience with the tech stack. Also below
           is a reference to our component library, there are many components
           that you can use in the Challenger (for example for the search page).
           If you have any question you can always{' '}
-          <a href="mailto:rob@ticketswap.com">contact us</a> <Emoji>💪</Emoji>
-        </Description>
+          <a href="mailto:rob@ticketswap.com">contact us</a>{' '}
+          <StyledEmoji>💪</StyledEmoji>
+        </StyledDescription>
 
         <Collapsible buttonLabel="References">
-          <List>
+          <StyledList>
             <li>
               We are using our own component library in this project, if you
               want to check it out go to. Within this project you'll find our
@@ -127,10 +130,10 @@ const Home = () => {
               and explore the local API in the{' '}
               <a href="/api/graphql">playground</a>.
             </li>
-          </List>
+          </StyledList>
         </Collapsible>
 
-        <SubTitle>Popular events</SubTitle>
+        <StyledSubTitle>Popular events</StyledSubTitle>
         <Events data={data} loading={loading} />
       </Container>
     </main>

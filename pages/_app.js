@@ -13,6 +13,11 @@ export default function App({ Component, pageProps }) {
     <ApolloProvider client={apolloClient}>
       <Head>
         <title>Home | TicketSwap Challenger</title>
+        <meta
+          name="description"
+          content="This is a description of the website."
+        ></meta>{' '}
+        {/* NOTE: Added meta tags for best SEO (otherwise what's the point of using Next!) */}
         <link rel="icon" href="/favicon.png" />
       </Head>
 
@@ -28,8 +33,9 @@ export default function App({ Component, pageProps }) {
 
 /* A TODO list if I had more time:
   - Refactor to TS
-  - Unit tests
+  - Testing (unit or storybook integrated)
   - Performance checks - lighthouse score is not great!
   - Amendments to some stories, e.g. to improve a11y
   - Make footer stick to bottom if not much content
+  - Storybook docs
 */

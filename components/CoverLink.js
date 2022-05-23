@@ -15,7 +15,7 @@ const StyledLink = styled.a`
     color: ${({ $active }) => !$active && color.foregroundSubtle};
   }
 `
-// NOTE: Didn't really wanna build this from the ground up. Would make more sense to use BaseButton. But no linking capabilities on that component atm it seems.
+// 5 NOTE: Didn't really wanna build this from the ground up. Would make more sense to use BaseButton. But no linking capabilities on that component atm it seems.
 export const CoverLink = ({ href, label }) => {
   const router = useRouter()
 

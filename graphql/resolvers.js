@@ -14,7 +14,7 @@ export const resolvers = {
     },
     filterEvents(_parent, args, _context, _info) {
       const { name } = args
-      // NOTE: Just doing simple search here. Would usually use fuse js or leave it to backend
+      // NOTE: 3 Just doing simple search here. Would usually use fuse js or leave it to backend
       return (
         events.filter(event =>
           event.name.toLowerCase().includes(name.toLowerCase())

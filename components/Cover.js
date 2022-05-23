@@ -16,7 +16,7 @@ const StyledTitle = styled(H1)`
   color: ${color.lightForeground};
 `
 
-const LinksContainer = styled.div`
+const StyledLinksContainer = styled.div`
   display: flex;
   gap: ${space[16]};
   justify-content: center;
@@ -30,10 +30,11 @@ const Cover = () => {
     <StyledWrapper>
       <TicketSwap size={64} />
       <StyledTitle>TicketSwap Challenger</StyledTitle>
-      <LinksContainer>
+      <StyledLinksContainer>
+        {/* 5 NOTE: Links could do with some good UI design! */}
         <CoverLink href="/" label="Home" />
         <CoverLink href="/search" label="Search" />
-      </LinksContainer>
+      </StyledLinksContainer>
     </StyledWrapper>
   )
 }

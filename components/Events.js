@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
   grid-template-columns: repeat(
     auto-fit,
     minmax(350px, 1fr)
-  ); // NOTE: Change card spacing for greater responsiveness
+  ); // 1 NOTE: Change card spacing for greater responsiveness
 `
 
 const StyledLink = styled.a`
@@ -32,7 +32,7 @@ const Events = ({ data, loading }) => {
     )
   }
 
-  // NOTE: Bit hacky, maybe. Could also pass in a query type def as a string and extract that. But the queries in this proj always return one item in the data obj, so I feel this is safe for now.
+  // 3 NOTE: Bit hacky, maybe. Could also pass in a query type def as a string and extract that. But the queries in this proj always return one item in the data obj, so I feel this is safe for now.
   const dataLabel = Object.keys(data)[0]
   const events = data[dataLabel]
 
@@ -41,7 +41,6 @@ const Events = ({ data, loading }) => {
   return (
     <StyledWrapper>
       {events.map(({ id, name, location, date, imageUrl }) => (
-        // NOTE: Only browser console bug was the classic "missing key" error
         <Link href={`/event/${id}`} key={id} passHref>
           <StyledLink>
             <Card

@@ -48,7 +48,7 @@ function Search() {
       </Head>
 
       <Container>
-        {/* Styling is difficult here because of all the extra layers around the search */}
+        {/* NOTE: Styling is difficult here because of all the extra layers around the Basic Input component */}
         <StyledForm onSubmit={handleSearch}>
           <Input
             id="search"
